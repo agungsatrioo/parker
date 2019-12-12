@@ -199,5 +199,34 @@ class M_user extends CI_Model {
         }
     }
 
+    public function ulogin($input) {
+        $uname         = $input->post('username');
+        $password      = $input->post('password');
 
+        if(!$this->find_uname($uname)) {
+            $this->session->set_flashdata('error', 'Nama pengguna tidak ada.');
+            return false;
+        } else {
+            echo "this";
+            $user_db  = $this->m_query->select(
+                        array(
+                            'table' => 't_user',
+                            'conditions' => array(
+                                'username' => $uname,
+                            )
+                        )
+                    );
+
+            $udb = $user_db[0];
+
+            if(password_verify($password,$udb->password)) {
+                $user_data = array(
+                    "username"  => $udb->username
+                );
+
+                $this->session->set_userdata($user_data);
+                return true;
+            }
+        }
+    }
 }

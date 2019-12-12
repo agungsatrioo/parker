@@ -11,6 +11,7 @@ class MY_Controller extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->ci_minifier->init(0);
+        $this->load->library(['session']);
     }
 
     protected function makeview($page, array $data) {
