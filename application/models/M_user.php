@@ -139,4 +139,65 @@ class M_user extends CI_Model {
             return false;
         }
     }
+
+    //PARKER Function
+
+    public function find_email($email) {
+        $user_db  = $this->m_query->select(
+                        array(
+                            'table' => 't_user',
+                            'conditions' => array(
+                                'email' => $email,
+                            )
+                        )
+                    );
+
+        if($user_db == null) return false;
+
+        return true;
+    }
+
+    public function find_uname($uname) {
+        $user_db  = $this->m_query->select(
+                        array(
+                            'table' => 't_user',
+                            'conditions' => array(
+                                'username' => $uname,
+                            )
+                        )
+                    );
+
+        if($user_db == null) return false;
+
+        return true;
+    }
+
+    public function register($input) {
+        $nama          = $input->post('nama');
+        $uname         = $input->post('uname');
+        $email         = $input->post('email');
+        $password      = password_hash($input->post('password'), PASSWORD_DEFAULT);
+
+        if($this->find_uname($uname)) {
+            $this->session->set_flashdata('error', 'Nama pengguna sudah ada.');
+            return false;
+        } else if($this->find_email($email)) {
+            $this->session->set_flashdata('error', 'Email sudah digunakan sebelumnya.');
+            return false;
+        } else {
+            $qry =  $this->m_query->insert(
+                't_user',
+                array(
+                    'nama_lengkap' => $nama,
+                    'email' => $email,
+                    'username' => $uname,
+                    'password' => $password
+                )
+            );
+
+            return true;
+        }
+    }
+
+
 }

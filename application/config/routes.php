@@ -55,3 +55,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['daftar'] = 'beranda/daftar';
 $route['masuk'] = 'beranda/login';
+$route['user_submit'] = 'beranda/func_daftar';
+$route['user_login'] = 'beranda/func_login';
