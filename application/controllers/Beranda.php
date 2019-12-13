@@ -7,7 +7,9 @@ class Beranda extends MY_Controller {
 
        switch($method) {
            case "": case "index":
-                $this->load->view('parker/v_index');
+               $data['uname'] = $this->session->username;
+
+                $this->load->view('parker/v_index',$data);
                 break;
            case "daftar":
                 $this->load->view('parker/v_daftar');
@@ -26,8 +28,16 @@ class Beranda extends MY_Controller {
            case "func_login":
                echo "aa";
                $result = $this->M_user->ulogin($this->input);
-               echo $result;
+               if($result) {
+                    $this->session->set_flashdata("success", "Pengguna berhasil dibuat.");
+                   redirect("");
+               }
+               else redirect("masuk");
                 break;
+           case "func_logout":
+               $this->M_user->ulogout();
+               redirect("");
+               break;
 
 
         }

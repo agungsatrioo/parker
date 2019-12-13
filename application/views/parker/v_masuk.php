@@ -27,9 +27,14 @@
 				<span class="login100-form-title p-b-37">
 					Masuk
 				</span>
-<?php if(!empty($this->session->flashdata('success'))) { ?>
+                    <?php if(!empty($this->session->flashdata('success'))) { ?>
                     <div class="alert alert-success">
                         <b><?= $this->session->flashdata('success') ?></b>
+                    </div>
+                    <?php } ?>
+                <?php if(!empty($this->session->flashdata('error'))) { ?>
+                    <div class="alert alert-danger">
+                        <b><?= $this->session->flashdata('error') ?></b>
                     </div>
                     <?php } ?>
 

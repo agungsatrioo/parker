@@ -229,4 +229,8 @@ class M_user extends CI_Model {
             }
         }
     }
+
+    public function ulogout() {
+        $this->session->unset_userdata('username');
+    }
 }

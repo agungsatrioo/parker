@@ -49,8 +49,13 @@
                             <a href="https://www.linked.in/"><i class="fa fa-linkedin"></i></a>
                         </div>
                         <div class="user-panel">
+                            <?php if(!empty($uname)) { ?>
+                            <a href="#">Halo, <?= $uname ?></a>
+                            <a href="keluar"><i class="fa fa-sign-out"></i> Keluar</a>
+                            <?php  } else { ?>
                             <a href="daftar"><i class="fa fa-user-circle-o"></i> Daftar</a>
                             <a href="masuk"><i class="fa fa-sign-in"></i> Masuk</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
